@@ -22,5 +22,5 @@ Exercises and materials can be found here.
 - Provide challenges and "crackme" exercises so that students gain hands on experience with Ghidra
 
 ## Playlist for the Reverse Engineering with Ghidra series:
-[link to hackaday Ghidra video course!](https://www.youtube.com/playlist?list=PL_tws4AXg7auglkFo6ZRoWGXnWL0FHAEi)
-[Link to hackaday Ghidra course website!](https://hackaday.io/course/172292-introduction-to-reverse-engineering-with-ghidra)
+- [Link to hackaday Ghidra video course!](https://www.youtube.com/playlist?list=PL_tws4AXg7auglkFo6ZRoWGXnWL0FHAEi)
+- [Link to hackaday Ghidra course website!](https://hackaday.io/course/172292-introduction-to-reverse-engineering-with-ghidra)
