@@ -6,7 +6,7 @@ Using the publicly available HackadayU course to familiarize myself with Ghidra.
 3. Session Three Lecture
 4. Session Four Lecture
 
-Exercises and materials can be found here.
+Exercises and materials can be found [here](https://github.com/wrongbaud/hackaday-u).
 
 ## Course Goals
 - Familiarize students with the basic concepts behind software reverse engineering
