@@ -88,7 +88,43 @@ root@faa7f12d4c35:/home/hackaday/hackaday-u/session-one/exercises# ./c2 h---u
 Correct -- maybe we should pay attention to more characters...
 ````
 # Challenge three
-some text
+This challenge proved a bit harder to read just using the assembly instructions provided in Ghidra. It does still check for the supplied password and the password length has to be longer than 4. The challinging part came with the use of pointers in the following assemly code. I therefor opted to use GDB in order to dynamically look at the registers as the program got executed.
+````
+                     LAB_001006e1                                    XREF[1]:     001006cc(j)  
+001006e1 c6 45 fd 20     MOV        byte ptr [RBP + local_b],0x20
+001006e5 48 8b 45 e0     MOV        RAX,qword ptr [RBP + local_28]
+001006e9 48 83 c0 08     ADD        RAX,0x8
+001006ed 48 8b 00        MOV        RAX,qword ptr [RAX]
+001006f0 48 83 c0 02     ADD        RAX,0x2
+001006f4 0f b6 00        MOVZX      EAX,byte ptr [RAX]
+001006f7 88 45 fe        MOV        byte ptr [RBP + local_a],AL
+001006fa 48 8b 45 e0     MOV        RAX,qword ptr [RBP + local_28]
+001006fe 48 83 c0 08     ADD        RAX,0x8
+00100702 48 8b 00        MOV        RAX,qword ptr [RAX]
+00100705 48 83 c0 03     ADD        RAX,0x3
+00100709 0f b6 00        MOVZX      EAX,byte ptr [RAX]
+0010070c 88 45 ff        MOV        byte ptr [RBP + local_9],AL
+0010070f 0f b6 55 fe     MOVZX      EDX,byte ptr [RBP + local_a]
+00100713 0f b6 45 ff     MOVZX      EAX,byte ptr [RBP + local_9]
+00100717 29 c2           SUB        EDX,EAX
+00100719 0f b6 45 fd     MOVZX      EAX,byte ptr [RBP + local_b]
+0010071d 39 c2           CMP        EDX,EAX
+0010071f 75 13           JNZ        LAB_00100734
+00100721 48 8d 3d        LEA        RDI,[s_Correct!_You_figured_it_out_..._l_00100   = "Correct! You figured it out .
+         10 01 00 00
+00100728 e8 23 fe        CALL       puts                                             int puts(char * __s)
+         ff ff
+...
+````
+What I learned was that the ```0x20``` value is stored at the ```RBP + local_b``` address. The user supplied password is then stored in RAX and moved to focus on the second letter in the password, which in turn is stored at the ```RBP + local_a``` address.  Then we focus on the third letter in the password and store that to the ```RBP + local_9``` address. The ```EDX``` register is then loaded with the value stored at ```RBP + local_a```, while the ```EAX``` register is loaded with the value stored at ```RBP + local_9```, before subtracting EAX from EDX. The result is stored in ```EDX``` and compared to the value ```0x20``` stored at the ```RBP + local_b``` address. 
+
+What this means is that for the password to be correct the 2 and 3 last letters has to give the sum ```0x20``` == ```32``` when the 2nd is subtracted from the third i.e. 'E' == ```0x45``` subtracted from 'e' == ```0x65``` as this results in ```0x20```. 
+
+Running the program in the docker environment with the password ```--eE-``` proves this. 
+```
+root@faa7f12d4c35:/home/hackaday/hackaday-u/session-one/exercises# ./c3 --eE-
+Correct! You figured it out ... looks like we have to upgrade our security...
+```
 
 # Challenge four
 some text
