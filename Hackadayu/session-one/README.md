@@ -118,6 +118,9 @@ This challenge proved a bit harder to read just using the assembly instructions 
 ````
 What I learned was that the ```0x20``` value is stored at the ```RBP + local_b``` address. The user supplied password is then stored in RAX and moved to focus on the second letter in the password, which in turn is stored at the ```RBP + local_a``` address.  Then we focus on the third letter in the password and store that to the ```RBP + local_9``` address. The ```EDX``` register is then loaded with the value stored at ```RBP + local_a```, while the ```EAX``` register is loaded with the value stored at ```RBP + local_9```, before subtracting EAX from EDX. The result is stored in ```EDX``` and compared to the value ```0x20``` stored at the ```RBP + local_b``` address. 
 
+Furthermore, I realized that not only are the characters stored in memory as HEX-values, but they are also represented in reverse order. Lets say we enter ```AABB
+``` it would not be sotred as ```41414242``` but ```42424141```. 
+
 What this means is that for the password to be correct the 2 and 3 last letters has to give the sum ```0x20``` == ```32``` when the 2nd is subtracted from the third i.e. 'E' == ```0x45``` subtracted from 'e' == ```0x65``` as this results in ```0x20```. 
 
 Running the program in the docker environment with the password ```--eE-``` proves this. 
