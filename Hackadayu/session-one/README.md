@@ -43,7 +43,7 @@ Correct! The password was hackadayu this whole time!
 ````
 
 # Challenge two
-The program still checks for the user supplied password before testing for the password length greater than 4. We see that the ```rdi``` register is used by ```strlen``` and that the result of the function is stored in the ```rax``` register.
+The c2 ELF binary still checks for the user supplied password before testing for the password length greater than 4. We see that the ```rdi``` register is used by ```strlen``` and that the result of the function is stored in the ```rax``` register.
 ````
 004005a3 48 8b 45 f0     MOV        RAX,qword ptr [RBP + local_18]
 004005a7 48 83 c0 08     ADD        RAX,0x8
@@ -88,7 +88,7 @@ root@faa7f12d4c35:/home/hackaday/hackaday-u/session-one/exercises# ./c2 h---u
 Correct -- maybe we should pay attention to more characters...
 ````
 # Challenge three
-This challenge proved a bit harder to read just using the assembly instructions provided in Ghidra. It does still check for the supplied password and the password length has to be longer than 4. The challenging part came with the use of pointers in the following assemly code. I therefor opted to use GDB in order to dynamically look at the registers as the program got executed.
+This c3 challenge proved a bit harder to read just using the assembly instructions provided in Ghidra. It does still check for the supplied password and the password length has to be longer than 4. The challenging part came with the use of pointers in the following assemly code. I therefor opted to use GDB in order to dynamically look at the registers as the program got executed.
 ````
                      LAB_001006e1                                    XREF[1]:     001006cc(j)  
 001006e1 c6 45 fd 20     MOV        byte ptr [RBP + local_b],0x20
@@ -129,7 +129,7 @@ Correct! You figured it out ... looks like we have to upgrade our security...
 ```
 
 # Challenge four
-The fourth ELF binary was a bit more challenging in that it contained a lot more jumps back and forth between addresses. This time I used the 'Block flow' graph tool to get an overview of the code flow in the main function. The program checked for user input and the password had to be longer than 9 characters. We then encounter our first while loop. 
+The fourth ELF binary,  c4, was a bit more challenging in that it contained a lot more jumps back and forth between addresses. This time I used the 'Block flow' graph tool to get an overview of the code flow in the main function. The program checked for user input and the password had to be longer than 9 characters. We then encounter our first while loop. 
 ````
 ...
                       start_while_loop
