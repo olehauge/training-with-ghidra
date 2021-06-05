@@ -129,4 +129,58 @@ Correct! You figured it out ... looks like we have to upgrade our security...
 ```
 
 # Challenge four
-some text
+The fourth ELF binary was a bit more challenging in that it contained a lot more jumps back and forth between addresses. This time I used the 'Block flow' graph tool to get an overview of the code flow in the main function. The program checked for user input and the password had to be longer than 9 characters. We then encounter our first while loop. 
+````
+...
+                      start_while_loop
+ 004005f5 89 45 f4        MOV        dword ptr [RBP + local_14],pwd_lenght
+ 004005f8 c7 45 f0        MOV        dword ptr [RBP + i],0x0
+          00 00 00 00
+ 004005ff eb 48           JMP        while_i_less_than_pwd_length
+                      if_something                                    XREF[1]:     0040064f(j)  
+ 00400601 8b 45 f0        MOV        pwd_lenght,dword ptr [RBP + i]
+ 00400604 48 63 d0        MOVSXD     RDX,pwd_lenght
+ 00400607 48 8b 45 f8     MOV        pwd_lenght,qword ptr [RBP + local_10]
+ 0040060b 48 01 d0        ADD        pwd_lenght,RDX
+ 0040060e 0f b6 00        MOVZX      pwd_lenght,byte ptr [pwd_lenght]=>s_hackaday-u   = "hackaday-u"
+ 00400611 0f be c0        MOVSX      pwd_lenght,pwd_lenght
+ 00400614 8d 48 02        LEA        ECX,[pwd_lenght + 0x2]
+ 00400617 48 8b 45 e0     MOV        pwd_lenght,qword ptr [RBP + local_28]
+ 0040061b 48 83 c0 08     ADD        pwd_lenght,0x8
+ 0040061f 48 8b 10        MOV        RDX,qword ptr [pwd_lenght]
+ 00400622 8b 45 f0        MOV        pwd_lenght,dword ptr [RBP + i]
+ 00400625 48 98           CDQE
+ 00400627 48 01 d0        ADD        pwd_lenght,RDX
+ 0040062a 0f b6 00        MOVZX      pwd_lenght,byte ptr [pwd_lenght]
+ 0040062d 0f be c0        MOVSX      pwd_lenght,pwd_lenght
+ 00400630 39 c1           CMP        ECX,pwd_lenght
+ 00400632 74 11           JZ         increment_i
+                      print_wrong_pwd
+ 00400634 bf 63 07        MOV        EDI=>s_Wrong_Password!_00400763,s_Wrong_Passwo   = "Wrong Password!"
+          40 00
+ 00400639 e8 12 fe        CALL       puts                                             int puts(char * __s)
+          ff ff
+                      call_exit
+ 0040063e b8 ff ff        MOV        pwd_lenght,0xffffffff
+          ff ff
+ 00400643 eb 1b           JMP        exit_program
+                      increment_i                                     XREF[1]:     00400632(j)  
+ 00400645 83 45 f0 01     ADD        dword ptr [RBP + i],0x1
+                      while_i_less_than_pwd_length                    XREF[1]:     004005ff(j)  
+ 00400649 8b 45 f0        MOV        pwd_lenght,dword ptr [RBP + i]
+ 0040064c 3b 45 f4        CMP        pwd_lenght,dword ptr [RBP + local_14]
+ 0040064f 7c b0           JL         if_something
+                      print_correct_pwd
+ 00400651 bf 78 07        MOV        EDI=>s_Correct!_You've_entered_the_righ_004007   = "Correct! You've entered the r
+          40 00
+ 00400656 e8 f5 fd        CALL       puts                                             int puts(char * __s)
+          ff ff
+...
+````
+After reading the assembly instructions I was still a bit uncertain about what the while loop compared so I used GDB again to dynamically go through the program step by step. What I learnt was that the while loop iterates over the suplied password and compares it to the ```hackaday-u``` string, but instead of comparing the direct HEX-values of the string to the suplied password it adds ```0x2``` to each character/value first. This means that in order for our password to be correct we have to add 2 to all the HEX-vaules represnting the ```hackaday-u``` string. For example, 'h' == 0x65; 0x68 + 0x2 = 0x6a == 'j' and so on...
+
+Running the program in the docker environment with the password ```jcemcfc{/w``` proves this.
+```
+root@faa7f12d4c35:/home/hackaday/hackaday-u/session-one/exercises# ./c4 jcemcfc{/w
+Correct! You've entered the right password ... you're getting better at this!
+```
