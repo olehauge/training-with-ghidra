@@ -88,7 +88,7 @@ root@faa7f12d4c35:/home/hackaday/hackaday-u/session-one/exercises# ./c2 h---u
 Correct -- maybe we should pay attention to more characters...
 ````
 # Challenge three
-This challenge proved a bit harder to read just using the assembly instructions provided in Ghidra. It does still check for the supplied password and the password length has to be longer than 4. The challinging part came with the use of pointers in the following assemly code. I therefor opted to use GDB in order to dynamically look at the registers as the program got executed.
+This challenge proved a bit harder to read just using the assembly instructions provided in Ghidra. It does still check for the supplied password and the password length has to be longer than 4. The challenging part came with the use of pointers in the following assemly code. I therefor opted to use GDB in order to dynamically look at the registers as the program got executed.
 ````
                      LAB_001006e1                                    XREF[1]:     001006cc(j)  
 001006e1 c6 45 fd 20     MOV        byte ptr [RBP + local_b],0x20
