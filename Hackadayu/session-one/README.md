@@ -1,3 +1,8 @@
+# Session Outline
+- What is Software Reverse Engineering (SRE)?
+- Extracting information from compiled programs
+- Disassembly/x86 ASM refresher
+
 # Challenge one
 The c1 ELF binary was opened with Ghidra. The listing view showed the assembly instructions, while the decompile window showed the estimated C-code equivalent. Focusing on the assembly, we can see that it first does a compare to see if the password was supplied when the program was ran. Either it tells us to supply the password or it jumps to the ```LAB_00100745``` label.
 ```
