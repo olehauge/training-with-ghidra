@@ -52,7 +52,7 @@ The first compares the ```argc``` variable which is stored at ```RBP + local_1c`
 001006ef 3b 45 f8        CMP        EAX,dword ptr [RBP + local_10]
 001006f2 7f 13           JG         cmpTwoOK
 ```
-The second compares the argument stored at ```RBP + local_14``` with the argument stored at ```RBP + local_10``` and checks if the result is greater than. 
+The second compares the argument stored at ```RBP + local_14``` (L14) with the argument stored at ```RBP + local_10``` (L10) and checks if the result is greater than. I think L14 is the first variable and L10 the second, but the decompiler has it the other way around. Who is rigth. Could I be missing the way the arguments are stored in the memory (reversed)?
 ```
 0010070d 3b 45 f4        CMP        EAX,dword ptr [RBP + local_14]
 00100710 7d 13           JGE        cmpThreeOK
