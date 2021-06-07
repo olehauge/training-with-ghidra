@@ -1,4 +1,10 @@
 # Control Flow
+For this challenge we were to:
+- find the number of compare statements in main, 
+- what the three values being compared are, 
+- and see if it is possible to pass all the checks. 
+
+## Fixing syntax
 For this session we learned that we can modify a functions signature, and how this could improve the decompiled C-code. 
 For this challenge I changed the main function signature from ```undefined8 main(int param_1,long param_2)``` to ```int main(int argc,char **argv)```. 
 This way it is defined with the C-standard argument counter ```int argc``` and argument vector ```char **argv```.
@@ -34,4 +40,27 @@ int main(int argc,char **argv)
       if (iVar2 << 1 < iVar1) {
 ...
 ```
+## Number of compare statements
+There are 4 compares in total:
+```        
+00100699 83 7d ec 03     CMP        dword ptr [RBP + local_1c],0x3
+0010069d 74 16           JZ         cmpOneOK
+```
+The first compares the ```argc``` variable which is stored at ```RBP + local_1c``` with 3. Meaning that we have to provide 2 arguments for the program to pass (given by ```JZ```). 
+```       
+001006ec 8b 45 f4        MOV        EAX,dword ptr [RBP + local_14]
+001006ef 3b 45 f8        CMP        EAX,dword ptr [RBP + local_10]
+001006f2 7f 13           JG         cmpTwoOK
+```
+The second compares the argument stored at ```RBP + local_14``` with the argument stored at ```RBP + local_10``` and checks if the result is greater than. 
+```
+0010070d 3b 45 f4        CMP        EAX,dword ptr [RBP + local_14]
+00100710 7d 13           JGE        cmpThreeOK
+```
+```
+0010072b 83 f8 63        CMP        EAX,0x63
+0010072e 7f 13           JG         cmpFourOK=SUCCESS
+```
+
+
 
