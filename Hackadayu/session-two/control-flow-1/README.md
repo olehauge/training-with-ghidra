@@ -52,15 +52,16 @@ The first compares the ```argc``` variable which is stored at ```RBP + local_1c`
 001006ef 3b 45 f8        CMP        EAX,dword ptr [RBP + local_10]
 001006f2 7f 13           JG         cmpTwoOK
 ```
-The second compares the argument stored at ```RBP + local_14``` (L14) with the argument stored at ```RBP + local_10``` (L10) and checks if the result is greater than. I think L14 is the first variable and L10 the second, but the decompiler has it the other way around. Who is rigth. Could I be missing the way the arguments are stored in the memory (reversed)?
+The second compares the argument stored at ```RBP + local_14``` with the argument stored at ```RBP + local_10``` and checks if the result is greater than. The values that are compared here are the results of ```atoi``` functions. ```int atoi(const char *str)``` converts the string argument ```str``` to an integer (type int).
 ```
 0010070d 3b 45 f4        CMP        EAX,dword ptr [RBP + local_14]
 00100710 7d 13           JGE        cmpThreeOK
 ```
+The third compares the the stored variable at ```RBP + local_10```, which has been left-shifted once, with the variable stored at ```RBP + local_14```. If the result is greater than or equal, it goes to the last check.
 ```
 0010072b 83 f8 63        CMP        EAX,0x63
 0010072e 7f 13           JG         cmpFourOK=SUCCESS
 ```
-
+The fourth compares 
 
 
