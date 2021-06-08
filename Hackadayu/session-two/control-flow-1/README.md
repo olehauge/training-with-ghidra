@@ -65,9 +65,9 @@ The third compares the the stored variable at ```RBP + local_10```, which has be
 The fourth compares the value stored in ```EAX``` to ```0x63/99/c```. The values is the result of the addition of the values at address ```RBP + local_14``` and ```RBP + local_10```;```RBP + local_14``` is subtracted from the value and stored into ```EAX``` before the comparison. If the result is greater than the program will call the success string. 
 
 ## Passing all the checks
-The fourth check has to have the value ```99``` in order to pass. It is var1 + var2 - var2 = var1? 
+The fourth check has to have the value ```99``` in order to pass. It is var2 + var1 - var1 = var1
 
-The third check has to have the var2 leftshifted once be greater than or equal var2.
+The third check has to have the var2 leftshifted once be greater than or equal var1.
 
 The second check has to have the var1 greater than var2. 
 
