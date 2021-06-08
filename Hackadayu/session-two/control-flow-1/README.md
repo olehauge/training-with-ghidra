@@ -52,23 +52,31 @@ The first compares the ```argc``` variable which is stored at ```RBP + local_1c`
 001006ef 3b 45 f8        CMP        EAX,dword ptr [RBP + local_10]
 001006f2 7f 13           JG         cmpTwoOK
 ```
-The second compares the argument stored at ```RBP + local_14``` with the argument stored at ```RBP + local_10``` and checks if the result is greater than. The values that are compared here are the results of ```atoi``` functions. ```int atoi(const char *str)``` converts the string argument ```str``` to an integer (type int).
+The second compares the argument stored at ```RBP + local_14``` (ivar1) with the argument stored at ```RBP + local_10``` (ivar2) and checks if the result is greater than. The values that are compared here are the results of ```atoi``` functions. ```int atoi(const char *str)``` converts the string argument ```str``` to an integer (type int).
 ```
+00100707 d1 65 f8        SHL        dword ptr [RBP + local_10],1
+0010070a 8b 45 f8        MOV        EAX,dword ptr [RBP + local_10]
 0010070d 3b 45 f4        CMP        EAX,dword ptr [RBP + local_14]
 00100710 7d 13           JGE        cmpThreeOK
 ```
-The third compares the the stored variable at ```RBP + local_10```, which has been left-shifted once, with the variable stored at ```RBP + local_14```. If the result is greater than or equal, it goes to the last check.
+The third compares EAX with the value stored at ```RBP + local_14```. EAX is the result of left shifitng (SHL) the value stored at ```RBP + local_10``` by one. 
+If the result is greater than or equal, it goes to the last check.
+
+NOTE: Left shifting a value by 1 is the equivalent of doubling the value. 
 ```
 0010072b 83 f8 63        CMP        EAX,0x63
 0010072e 7f 13           JG         cmpFourOK=SUCCESS
 ```
-The fourth compares the value stored in ```EAX``` to ```0x63/99/c/1100011```. The values is the result of the addition of the values at address ```RBP + local_14``` and ```RBP + local_10```;```RBP + local_14``` is subtracted from the value and stored into ```EAX``` before the comparison. If the result is greater than the program will call the success string. 
+The fourth compares the value stored in ```EAX``` to ```0x63/99```. EAX is the result of the addition of the values at address ```RBP + local_14``` and ```RBP + local_10``` before subtracting ```RBP + local_14``` from the value. Basically, we end up with ivar2. If the result is greater than the program will call the success string. 
 
 ## Passing all the checks
-The fourth check has to have the value ```1100011``` in order to pass. It is var2 + var1 - var1 = var1
+- The fourth check has to have a value greater than ```99``` to pass e.g. the ivar2.
+- The third check has to have the var2 leftshifted once be greater than or equal var1. This means that the second argument has to be at least half the size of the first argument. 
+- The second check has to have the var1 greater than var2. 
+- The first check has to have the program executed with two arguments.
 
-The third check has to have the var2 leftshifted once be greater than or equal var1.
-
-The second check has to have the var1 greater than var2. 
-
-The first check has to have the program executed with two arguments.
+This means that the minimum value of the second argument has to be 100 and the first has to be at least one increment bigger: 101. Testing this with the program yields the following result: 
+```
+root@faa7f12d4c35:/home/hackaday/hackaday-u/session-two/exercises# ./control-flow-1 101 100
+Proper values provided! Great work!
+```
