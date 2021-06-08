@@ -62,7 +62,7 @@ The third compares the the stored variable at ```RBP + local_10```, which has be
 0010072b 83 f8 63        CMP        EAX,0x63
 0010072e 7f 13           JG         cmpFourOK=SUCCESS
 ```
-The fourth compares the value stored in ```EAX``` to ```0x63/99/c```. The values is the result of the addition of the values at address ```RBP + local_14``` and ```RBP + local_10```;```RBP + local_14``` is subtracted from the value and stored into ```EAX``` before the comparison. If the result is greater than the program will call the success string. 
+The fourth compares the value stored in ```EAX``` to ```0x63/99/c/1100011```. The values is the result of the addition of the values at address ```RBP + local_14``` and ```RBP + local_10```;```RBP + local_14``` is subtracted from the value and stored into ```EAX``` before the comparison. If the result is greater than the program will call the success string. 
 
 ## Passing all the checks
 The fourth check has to have the value ```99``` in order to pass. It is var2 + var1 - var1 = var1
