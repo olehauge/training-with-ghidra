@@ -69,6 +69,6 @@ The fourth check has to have the value ```99``` in order to pass. It is var1 + v
 
 The third check has to have the var1 leftshifted once be greater than or equal var2.
 
-The second check has to have the var2 greater than var1. 
+The second check has to have the var1 greater than var2. 
 
 The first check has to have the program executed with two arguments.
