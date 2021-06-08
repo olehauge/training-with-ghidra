@@ -67,7 +67,7 @@ The fourth compares the value stored in ```EAX``` to ```0x63/99/c```. The values
 ## Passing all the checks
 The fourth check has to have the value ```99``` in order to pass. It is var1 + var2 - var2 = var1? 
 
-The third check has to have the var1 leftshifted once be greater than or equal var2.
+The third check has to have the var2 leftshifted once be greater than or equal var2.
 
 The second check has to have the var1 greater than var2. 
 
