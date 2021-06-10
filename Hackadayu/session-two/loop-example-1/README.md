@@ -13,7 +13,7 @@ Looking at the assembly code we can see that the lenght of the string is stored 
                      firstLoopCheck                                  XREF[1]:     001006fc(j)  
 0010073a 8b 45 f4        MOV        EAX,dword ptr [RBP + counter]
 0010073d 3b 45 fc        CMP        EAX,dword ptr [RBP + stringLength]
- 00100740 7c bc           JL         firstLoop
+00100740 7c bc           JL         firstLoop
 ```
 
 ## What is it looking for
