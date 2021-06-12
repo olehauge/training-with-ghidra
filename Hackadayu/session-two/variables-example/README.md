@@ -6,8 +6,7 @@ For this challenge we were to:
 
 ## Find the number of global variables
 For this lecture we learned that the global variables of a C program is stored in the ```.data``` section of the file. 
-With this knowledge we can look at the assembly code and search for non-local variables that are used, and by cross referencing them with the data in the ```.data``` part
-we can see that the following are the global variables used. 
+With this knowledge we can look at the assembly code and search for non-local variables that are used, and by cross referencing them with the data in the ```.data``` part we can see that the following are the global variables used. 
 
 Global variables in main:
 ```
@@ -49,7 +48,7 @@ We can also see (in Ghidra) that the global variables are highlighted with a pin
 
 ## Find the number of used local variables
 The local variables are decalred within the function in question. In our case, this is the main function. At the begining of the function we can see that 
-all the local variables are declared and by looking through the assembly code we can verify that they are indeed being used. 
+all the local variables (6) are declared and by looking through the assembly code we can verify that they are indeed being used. 
 ```
                      **************************************************************
                      *                          FUNCTION                          *
@@ -106,4 +105,3 @@ This way the ```argv``` will get the values directly from the command line. **NO
 root@faa7f12d4c35:/home/hackaday/hackaday-u/session-two/exercises# ./variables-example $(python -c 'print("\x4a\x30\x28\x6b\x62\x24\x21\x52\x41\x41\x41\x41")')
 Proper keycode supplied, well done!
 ```
-
