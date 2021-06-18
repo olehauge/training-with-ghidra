@@ -24,3 +24,7 @@ char pointers ```char*``` with a length of 8 bytes each, and starting at an offs
 
 ## Get the right passcode
 We understand what the comapres are checking for, but what are the functions doing?
+Testing in GDB: 
+```
+run $(python -c 'print("12345678 \x41\x41\x41\x41\x42\x42\x42\x42 \xfc\x43\x43\x43\x44\x44\x44\x44")')
+``` 
