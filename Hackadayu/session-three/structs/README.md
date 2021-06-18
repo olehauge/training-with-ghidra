@@ -28,3 +28,18 @@ Testing in GDB:
 ```
 run $(python -c 'print("12345678 \x41\x41\x41\x41\x42\x42\x42\x42 \xfc\x43\x43\x43\x44\x44\x44\x44")')
 ``` 
+The ```key value``` is XORed with the each single character in the ```username value``` and the last byte is stored in ```al``` of which ```0x13``` is subtracted from the result. The result of which is compared to the supplied password. 
+
+E.g. for the first iteration of the while loop in ```gen_password```: ```12345678 (0xbc614e)``` is XORed with ```65 (0x41)```
+```
+  b    c    6    1    4   e
+1011 1100 0110 0001 0100 1110
+  0    0    0    0    4   1
+0000 0000 0000 0000 0100 0001
+xor result: 
+  b    c    6    1    0    f
+1011 1100 0110 0001 0000 1111
+```
+of which the last byte ```f``` is stored in the ```al``` register. ```0xf (15)``` minus ```0x13 (19)``` = ```-4```. 
+
+
