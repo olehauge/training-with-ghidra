@@ -23,3 +23,4 @@ The struct seems to consist of 3 members: key, username, password. These values 
 char pointers ```char*``` with a length of 8 bytes each, and starting at an offset of 8, 16, 24. 
 
 ## Get the right passcode
+We understand what the comapres are checking for, but what are the functions doing?
