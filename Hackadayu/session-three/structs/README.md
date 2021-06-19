@@ -23,7 +23,7 @@ The struct seems to consist of 3 members: key, username, password. These values 
 char pointers ```char*``` with a length of 8 bytes each, and starting at an offset of 8, 16, 24. 
 
 ## Get the right passcode
-I understand what the comapres are checking for and what the ```add``` function is doing, but what is the ```gen_password``` functions doing?
+I understand what the comapres are checking for and what the ```add``` function does, but what is the ```gen_password``` functions doing?
 Testing values dynamically in GDB: 
 ```
 run $(python -c 'print("12345678 \x41\x41\x41\x41\x42\x42\x42\x42 \x43\x43\x43\x43\x44\x44\x44\x44")')
