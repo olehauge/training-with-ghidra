@@ -29,3 +29,13 @@ I assume this is due to the swapped memory addresses, but this will become more 
 If the while loop does not fail we are greated by the success string: "Correct! Access granted!"
 
 ## GDB analysis
+
+## Learning notes
+- Functions can be stored in pointers and ran at a later point: 
+```
+00400857 48 c7 45        MOV        qword ptr [RBP + stored_keyCalcAddress],keyCalc
+         e0 95 06 
+         40 00
+...
+00400873 ff d0           CALL       RAX=>keyCalc                                    
+```
