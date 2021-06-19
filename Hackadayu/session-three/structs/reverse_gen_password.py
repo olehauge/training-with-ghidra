@@ -5,7 +5,7 @@ def tohex(val: int, nbits: int) -> str:
   return hex((val + (1 << nbits)) % (1 << nbits))
 
 
-def gen_password(key: int, username: bytes):
+def gen_password(key: int, username: bytes) -> str:
     result: str = ''
     username_hex: bytes = hexlify(username)
     username_ascii = str(username_hex, 'ascii')
