@@ -39,3 +39,4 @@ If the while loop does not fail we are greated by the success string: "Correct! 
 ...
 00400873 ff d0           CALL       RAX=>keyCalc                                    
 ```
+- Arguments are passed to functions using the registers, where the 1st argument uses ```RDI``` and the second uses ```RSI```. [More info here](http://6.s081.scripts.mit.edu/sp18/x86-64-architecture-guide.html).
