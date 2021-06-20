@@ -21,7 +21,7 @@ def gen_password(key: int, username: bytes) -> str:
         xor: str = hex(char_key ^ random_value)     # XOR
         al = int(xor[-2:], 16)                      # Get last byte
         sub_al: int = al - 19                       # Subtract 19
-        al_hex: str = to_hex(sub_al, 8)              # Last byte
+        al_hex: str = to_hex(sub_al, 8)             # Last byte
         result += al_hex
     return result.replace('0', '')
 
