@@ -55,7 +55,7 @@ Using GDB I can verify that the function:
    -  The same is repeated again.
    -  The result of which is added to ```-0x13```, of which the last bytes (AL) ```0xb6``` is stored in memory
    -  The loop repeats this until the counter equals the length stored at ```[rbp-0xc]```.
-6. 
+   -  The result is a string of XORed values.
 
 ## Learning notes
 - Functions can be stored in pointers and ran at a later point: 
