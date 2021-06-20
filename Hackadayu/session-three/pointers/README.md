@@ -57,7 +57,7 @@ Using GDB I can verify that the function:
    -  The loop repeats this until the counter equals the length stored at ```[rbp-0xc]```.
    -  The result is a string of XORed values.
 
-With my input of ```key``` = ```12345678``` and ```password``` = ```\x43\x43\x43\x43\x44\x44\x44\x44``` I got the following result: ```\xb6\xb6\xb6\xb6\xb7\xb7\xb7\xb7```. 
+With my input of ```key``` = ```12345678``` and ```password``` = ```\x43\x43\x43\x43\x44\x44\x44\x44``` I got the following result: ```\xb6\xb6\xb6\xb6\xb7\xb7\xb7\xb7```. I reversed the function in Python as well (code is supplied above).
 
 ### Code after compares and functions 
 The rest of the program consists of a loop that loops through the the XORed-result character by character and compares them to the corresponding characters in the ```username``` value. With my input this meant 8 iterations. 
