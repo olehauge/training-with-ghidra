@@ -34,8 +34,26 @@ What does the different functions actually do? I used the following input for te
 run $(python -c 'print("12345678 \x41\x41\x41\x41\x42\x42\x42\x42 \x43\x43\x43\x43\x44\x44\x44\x44")')
 ````
 ### keyCalc
+Using GDB I can verify that the function:
+1. Takes two input arguments: ```EDI``` (the ```key``` value: ```12345678```) and ```ESI``` (the value stored at ```RDX + 0xbeef```: ```12394557```).
+2. Adds the two values together: ```12345678 + 12394557 = 24740235```
+3. Left shifts the reuslt 3 times (same as multiplying with 8), which gives: ```197921880``` or ```0xbcc0c58```.
 
 ### swapNames
+Using GDB I can verify that the function:
+1. Takes two input arguments: ```RDI``` == the address ```0x7ffd65516db8``` and ```RSI``` == the address ```0x7ffd65516dc0```. 
+2. Allocates memory on the heap and return the address for the memory in ```RAX```.
+3. Stores the ```0x7ffd65516db8``` address to ```RAX```.
+4. Takes the last byte (```0x7e```) of the value, ```0x6551787e``` stored at ```0x7ffd65516db8```, and stores it in ```rbp-0x8```.
+5. Stores the ```0x7ffd65516dc0``` address to ```RAX```.
+6. Takes the last byte (```0x87```) of the value, ```0x65517887``` stored at ```0x7ffd65516dc0```, and stores it in ```edx```.
+7. Then sets ```RAX``` to ```0x7ffd65516dc0```.
+8. Moves ```DL``` to ```RAX```.
+9. Then sets ```RAX``` to ```rbp-0x8``` and moves it to ```edx```.
+10. ```RAX``` is then set to ```0x7ffd65516dc0```.
+11. Moves ```DL``` to ```RAX```.
+
+In short, it switches the pointers to the values stored at the given address locations.
 
 ### gen_password
 Using GDB I can verify that the function:
@@ -48,7 +66,7 @@ Using GDB I can verify that the function:
    -  It then adds the ```counter``` value to the address to get the current iteration char and stores it in the ```ECX``` register.
    -  It then stores the ```key``` value (not address) in ```EAX```.
    -  Before adding ```ECX``` and ```EAX``` together. For the first iteration this would look like: ```0xbc614e + 0x43 = 0xbc6191```.
-   -  It then stores a value ```0xbcc0c58``` from ```rax+0x18``` in ```EAX```, where ```RAX``` is first set to ```rbp-0x18``` e.g. the ```key``` value location.  
+   -  It then stores the ```keyCalc``` result value: ```0xbcc0c58``` from ```rax+0x18``` in ```EAX```, where ```RAX``` is first set to ```rbp-0x18```.  
    -  The ```EAX``` value is then XORed with the ```ECX``` value. e.g. ```0xbcc0c58 xor 0xbc6191 = 0xb706dc9```. 
    -  The last byte ```0xc9``` (AL) of the ```0xb706dc9``` XOR-result is stored.
    -  The ```counter``` value is then added to the address of ```0xc9```. 
