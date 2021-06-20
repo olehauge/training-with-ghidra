@@ -29,7 +29,7 @@ I assume this is due to the swapped memory addresses, but this will become more 
 If the while loop does not fail we are greated by the success string: "Correct! Access granted!"
 
 ## GDB analysis
-What does the different function actually do? I used the following input for testing:
+What does the different functions actually do? I used the following input for testing:
 ````
 run $(python -c 'print("12345678 \x41\x41\x41\x41\x42\x42\x42\x42 \x43\x43\x43\x43\x44\x44\x44\x44")')
 ````
@@ -56,6 +56,17 @@ Using GDB I can verify that the function:
    -  The result of which is added to ```-0x13```, of which the last bytes (AL) ```0xb6``` is stored in memory
    -  The loop repeats this until the counter equals the length stored at ```[rbp-0xc]```.
    -  The result is a string of XORed values.
+
+With my input of ```key``` = ```12345678``` and ```password``` = ```\x43\x43\x43\x43\x44\x44\x44\x44``` I got the following result: ```\xb6\xb6\xb6\xb6\xb7\xb7\xb7\xb7```. 
+
+### Code after compares and functions 
+The rest of the program consists of a loop that loops through the the XORed-result character by character and compares them to the corresponding characters in the ```username``` value. With my input this meant 8 iterations. 
+
+
+### Success string
+```
+run $(python -c 'print("12345678 \xb6\xb6\xb6\xb6\xb7\xb7\xb7\xb7 \x43\x43\x43\x43\x44\x44\x44\x44")'
+```
 
 ## Learning notes
 - Functions can be stored in pointers and ran at a later point: 
