@@ -82,8 +82,14 @@ The rest of the program consists of a loop that loops through the the XORed-resu
 
 
 ### Success string
+In GDB:
 ```
 run $(python -c 'print("12345678 \xb6\xb6\xb6\xb6\xb7\xb7\xb7\xb7 \x43\x43\x43\x43\x44\x44\x44\x44")'
+```
+or from terminal:
+```
+root@faa7f12d4c35:/home/hackaday/hackaday-u/session-three/exercises# ./pointers $(python -c 'print("12345678 \xb6\xb6\xb6\xb6\xb7\xb7\xb7\xb7 \x43\x43\x43\x43\x44\x44\x44\x44")')
+Correct! Access granted!
 ```
 
 ## Learning notes
