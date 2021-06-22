@@ -29,7 +29,7 @@ There are 4 syscalls in the program:
    - `rsi`: set to `fileFlags` = `0000000000000042`
    - `rdx`: set to `fileMode` = `0000000000000180`
 
-This means that the first syscall is `open(const char *pathname, int flags, mode_t mode)`, where `rdi` sets the `pathname` to the value stored at `fileName`, `rsi` sets `flags` to the value stored at `fileFlag`, and `rdx` sets `mode` to the value stored at `fileMode`. The `open()` system call opens the file specified by `pathname`.  If the specified file does not exist, it may optionally (if O_CREAT is specified in flags) be created by `open()`.
+This means that the first syscall is `open(const char *pathname, int flags, mode_t mode)`, where `rdi` sets the `pathname` to the value stored at `fileName`, `rsi` sets `flags` to the value stored at `fileFlag`, and `rdx` sets `mode` to the value stored at `fileMode`. The `open()` system call opens the file specified by `pathname`.  If the specified file does not exist, it may optionally (if O_CREAT is specified in flags) be created by `open()`. The return value of `open()` is a file descriptor, a small, nonnegative integer that is an index to an entry in the process's table of open file descriptors. 
 
 2. The second syscall (write):
    - `eax`: set to `0x1`
