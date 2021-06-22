@@ -11,7 +11,7 @@ For this challenge we were to:
 |:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|
 | rax	               | rdi	               | rsi	               | rdx	               | r10	               | r8	               | r9	               | rax                | 
 
-### Syscall values
+### Syscall values (relevant)
 | rax           | Name          | Entry point   | Documentation |
 |:-------------:|:-------------:|:-------------:|:-------------:|
 | 0	          | read	        | sys_read      | [read(2)](https://man7.org/linux/man-pages/man2/read.2.html)          |
