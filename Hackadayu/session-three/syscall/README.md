@@ -21,7 +21,7 @@ For this challenge we were to:
 | 60		       | exit |sys_exit | [exit(3)](https://man7.org/linux/man-pages/man3/exit.3.html)          |
 
 ## Initial analysis of the program
-First, the value that dictates what syscall is called is stored in the `rax` register. Arguments are passed and returned as with functions. 
+The entry point is located in the `entry` function in `_start` at the address `004000b0`.  
 
 There are 4 syscalls in the program:
 1. The first syscall (open):
@@ -51,3 +51,43 @@ This means that the third syscall is `int close(int fd);`, where `rdi` sets `fd`
    - `eax`: set to `0x3c (60)`
 
 This means that the fourht syscall is `noreturn void exit(int status);`, where `rdi` sets `status` to `0x0`.
+
+Based on these syscall it would seem like the program will start, open a file named `syscalls.txt`, write `hello-hackaday` to the file, close it and exit the program. I struggle to see what values are referred to for the `fileFlag` and `fileMode` as googling the values did not reuslt in any good matches, but I suppose the flag is used to create a file if it does not already exist. This is based on the fact that the program folder does not already contain such a file i.e. the file would have to be created. 
+
+## Running the program
+Running the program proved that it did indeed create a file named `syscalls.txt` when it did not exist, and it worte the tought message to it.
+**Before running the program**
+```
+root@faa7f12d4c35:/home/hackaday/hackaday-u/session-three/exercises# ls -la
+total 64
+drwxr-xr-x 1 root root 4096 Jun 22 16:33 .
+drwxr-xr-x 1 root root 4096 May 31 16:07 ..
+-rw-r--r-- 1 root root   28 Jun 18 08:36 exploit
+-rwxr-xr-x 1 root root 8974 May 31 16:07 files
+-rwxr-xr-x 1 root root 8835 May 31 16:07 pointers
+drwxr-xr-x 1 root root 4096 May 31 16:07 source
+-rwxr-xr-x 1 root root 8790 May 31 16:07 structs
+-rwxr-xr-x 1 root root 1282 May 31 16:07 syscall
+```
+**After running the program**
+```
+root@faa7f12d4c35:/home/hackaday/hackaday-u/session-three/exercises# ./syscall 
+root@faa7f12d4c35:/home/hackaday/hackaday-u/session-three/exercises# ls -la
+total 68
+drwxr-xr-x 1 root root 4096 Jun 22 16:34 .
+drwxr-xr-x 1 root root 4096 May 31 16:07 ..
+-rw-r--r-- 1 root root   28 Jun 18 08:36 exploit
+-rwxr-xr-x 1 root root 8974 May 31 16:07 files
+-rwxr-xr-x 1 root root 8835 May 31 16:07 pointers
+drwxr-xr-x 1 root root 4096 May 31 16:07 source
+-rwxr-xr-x 1 root root 8790 May 31 16:07 structs
+-rwxr-xr-x 1 root root 1282 May 31 16:07 syscall
+-rw------- 1 root root   14 Jun 22 16:34 syscalls.txt
+```
+**The content of the file**
+```
+root@faa7f12d4c35:/home/hackaday/hackaday-u/session-three/exercises# cat syscalls.txt 
+hello-hackaday
+```
+
+
