@@ -99,7 +99,7 @@ rax: On success, the number of bytes read is returned.
 
 ## Testing the program
 Testing the program confirms my hypothesis.
-`
+```
 root@faa7f12d4c35:/home/hackaday/hackaday-u/session-three/exercises# ./files 
 Could not find key file, please try again!
 
@@ -120,7 +120,7 @@ root@faa7f12d4c35:/home/hackaday/hackaday-u/session-three/exercises# touch pword
 root@faa7f12d4c35:/home/hackaday/hackaday-u/session-three/exercises# echo "CCCCDDDD" > pword.z 
 root@faa7f12d4c35:/home/hackaday/hackaday-u/session-three/exercises# ./files 
 Invalid character in password detected, exiting now!
-`
+```
 What remains know is to reverse the `gen_password` function in order to supply the correct values in the files.
 
 ## NOTES
