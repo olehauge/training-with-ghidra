@@ -124,6 +124,11 @@ Invalid character in password detected, exiting now!
 What remains know is to reverse the `gen_password` function in order to supply the correct values in the files.
 
 While testing I found that the `strlen` function stated that the files was one too long compared to the ASCII characters I had supplied. Doing some googling revealed that the `touch` command automatically supplied a trailing newline which was interpreted as a character. Too avoid this i used `echo -n "sometext" > file.ending` to write values to the files without any trailing charaters. 
+```
+root@faa7f12d4c35:/home/hackaday/hackaday-u/session-three/exercises# echo -n "AAAABBBB" > uname.x  
+root@faa7f12d4c35:/home/hackaday/hackaday-u/session-three/exercises# wc -c uname.x 
+8 uname.x
+```
 
 ## Finding the password
 
