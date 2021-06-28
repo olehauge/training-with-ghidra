@@ -128,7 +128,7 @@ root@faa7f12d4c35:/home/hackaday/hackaday-u/session-three/exercises# wc -c uname
 ## Finding the password
 I reversed the `gen_password` function in Python and gave it the `key` and `username` parameters: `1234` and `AAAABBBB`, which resulted in the password: `\xe7\xe7\xe7\xe7\xe8\xe8\xe8\xe8`.
 
-To get the success string from the program these values had to be in the files. To get the non-printable ASCII-characters in the file I used Pyhton:
+To get the success string from the program these values had to be in the files. I used Pyhton to get the non-printable ASCII-characters in the password file:
 ```
 python -c 'print("\xe7\xe7\xe7\xe7\xe8\xe8\xe8\xe8")' > pword.z 
 ```
