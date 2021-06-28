@@ -1,5 +1,5 @@
 # CrackMes
-Within this folder you will find four crackmes all sources from crackmes.one, the original authors will be credited below
+Within this folder I have four crackmes from crackmes.one, the original authors will be credited below
 
 1. kellek's noprelo: https://crackmes.one/crackme/5b9d312233c5d45fc286ae03
 2. m3hd1's half-twins: https://crackmes.one/crackme/5dce805c33c5d419aa0131ae
